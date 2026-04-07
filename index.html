@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yani Aliche — Engineering Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #0a0a0a;
+      --g1:     #1c1c1c;
+      --g2:     #555;
+      --g3:     #888;
+      --g4:     #bbb;
+      --g5:     #e8e8e8;
+      --g6:     #f4f4f4;
+      --white:  #ffffff;
+      --border: #e2e2e2;
+      --font:   'Inter', -apple-system, sans-serif;
+      --max:    1100px;
+      --gap:    28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--g1);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; cursor: pointer; }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #f0f0f0;
+      border-bottom: 1px solid #d8d8d8;
+      padding: 52px 0 48px;
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-left h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .hero-left p {
+      font-size: 0.9rem;
+      color: var(--g2);
+      line-height: 1.5;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .hero-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--g2);
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+    .hero-link:hover { color: var(--black); }
+    .hero-link svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.5; }
+    .hero-link.li-link svg { opacity: 1; }
+
+    /* ── PROJECTS ── */
+    #home-projects { border-bottom: 1px solid var(--border); padding: 72px 0; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--g3);
+      margin-bottom: 36px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--white);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      box-shadow: 0 10px 36px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--g6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .card-img-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--g4);
+    }
+
+    .card-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      font-size: 11.5px;
+      font-weight: 400;
+      padding: 4px 11px;
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--g1);
+      border: 1px solid #ccc;
+    }
+
+    .tag-wip {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: 100px;
+      background: var(--white);
+      color: #a07800;
+      border: 1.5px solid #e6b800;
+    }
+
+    /* ── SKILLS ── */
+    #home-skills {
+      border-bottom: 1px solid #d4d4d4;
+      padding: 72px 0;
+      background: #ebebeb;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+    }
+
+    .skill-group h3 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-group ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .skill-group ul li {
+      font-size: 14px;
+      color: var(--g2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-group ul li::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--g3);
+      flex-shrink: 0;
+    }
+
+    /* ── ABOUT ── */
+    #home-about {
+      border-bottom: 1px solid #d4d4d4;
+      padding: 72px 0;
+      background: #ebebeb;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+      align-items: start;
+    }
+
+    .about-photo {
+      width: 190px;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background: var(--g6);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--g4);
+      overflow: hidden;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .about-text h2 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .about-text p {
+      font-size: 14px;
+      color: var(--g2);
+      line-height: 1.8;
+      max-width: 580px;
+    }
+
+    /* ── DETAIL PAGE ── */
+    #view-detail { padding-bottom: 80px; }
+
+    .detail-back-bar { padding: 20px 0 0; }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--g2);
+      border: 1px solid var(--border);
+      background: var(--g6);
+      padding: 7px 14px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+    .btn-back:hover { background: var(--g5); color: var(--black); }
+    .btn-back svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .detail-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .detail-gallery-item {
+      aspect-ratio: 4/3;
+      background: var(--g6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .detail-gallery-item:hover { opacity: 0.85; }
+
+    .detail-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block; 
+      cursor: zoom-in;
+    }
+    .detail-gallery-item .img-placeholder-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--g4);
+    }
+
+    .detail-content {
+      margin-top: 44px;
+      max-width: 860px;
+    }
+
+    .detail-content .detail-section { margin-bottom: 36px; }
+
+    .detail-content h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .detail-content p {
+      font-size: 14px;
+      color: var(--g2);
+      line-height: 1.85;
+    }
+    .detail-content p + p { margin-top: 12px; }
+
+    .detail-content p.summary-bold {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.8;
+    }
+
+    .detail-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 20px;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 88vh;
+      border-radius: 10px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      object-fit: contain;
+      cursor: default;
+      display: block;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+      border: none;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.22); }
+    .lightbox-close svg { width: 18px; height: 18px; stroke: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { align-items: flex-start; }
+      .project-grid  { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid   { grid-template-columns: repeat(2, 1fr); }
+      .about-inner   { grid-template-columns: 1fr; gap: 28px; }
+      .about-photo   { width: 120px; }
+      .detail-gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 18px; }
+      .hero-inner { padding: 0 18px; }
+      .hero { padding: 56px 0 44px; }
+      #home-projects, #home-skills, #home-about { padding: 52px 0; }
+      .project-grid  { grid-template-columns: 1fr; }
+      .skills-grid   { grid-template-columns: 1fr; }
+      .detail-gallery { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner  { flex-direction: column; gap: 10px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LIGHTBOX OVERLAY ── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<!-- HOME VIEW -->
+<div id="view-home" class="view active">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1>Yani Aliche</h1>
+        <p>Portfolio — a collection of engineering projects I have been working on!</p>
+      </div>
+      <div class="hero-right">
+        <a class="hero-link" href="mailto:yanialiche07@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          yanialiche07@gmail.com
+        </a>
+        <a class="hero-link" href="mailto:ya289@cornell.edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          ya289@cornell.edu
+        </a>
+        <a class="hero-link li-link" href="https://www.linkedin.com/in/yanialiche" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="4" fill="#2D3748"/>
+            <text x="4" y="18" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="white">in</text>
+          </svg>
+          LinkedIn
+        </a>
+        <a class="hero-link" href="pdfs/resume.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+          </svg>
+          Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="home-projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <div class="project-grid" id="project-grid"></div>
+    </div>
+  </section>
+
+  <section id="home-skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Engineering</h3>
+          <ul>
+            <li>Aerodynamics</li>
+            <li>Experimental Testing</li>
+            <li>Data Analysis</li>
+            <li>Error Analysis</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>CAD &amp; Design</h3>
+          <ul>
+            <li>Fusion 360</li>
+            <li>SolidWorks</li>
+            <li>FreeCAD</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Fabrication</h3>
+          <ul>
+            <li>3D Printing</li>
+            <li>Prototyping</li>
+            <li>Wind Tunnel Construction</li>
+            <li>Woodshop Tools</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Programming</h3>
+          <ul>
+            <li>Python (scripting, data analysis)</li>
+            <li>Optimization Modeling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="home-about">
+    <div class="container">
+      <p class="section-label">About</p>
+      <div class="about-inner">
+        <div class="about-photo">
+          <!-- Replace with: <img src="images/headshot.jpg" alt="Yani Aliche"> -->
+          Photo
+        </div>
+        <div class="about-text">
+          <h2>Yani Aliche</h2>
+          <p>
+            I'm a Mechanical Engineering student at <span style="color:#b31b1b; font-weight:700;">Cornell University</span> originally from the Kansas City Metro. Outside of engineering, I enjoy playing soccer, trying new foods, swimming, and gaming!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /view-home -->
+
+
+<!-- DETAIL VIEW -->
+<div id="view-detail" class="view">
+  <div class="container">
+    <div class="detail-back-bar">
+      <button class="btn-back" onclick="showHome()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 12L6 8l4-4"/>
+        </svg>
+        Back
+      </button>
+    </div>
+    <div class="detail-gallery" id="detail-gallery"></div>
+    <div class="detail-content" id="detail-content"></div>
+  </div>
+</div><!-- /view-detail -->
+
+
+<script>
+  /* PROJECT DATA */
+  const PROJECTS = [
+    {
+      id: "airfoil-geometry",
+      title: "Airfoil Surface Geometry Research",
+      tags: ["Aerodynamics", "CAD Modeling", "Experimental Testing", "Data Analysis"],
+      thumbnail: "images/airfoil.jpg",
+      images: ["images/airfoil.jpg", "images/setup.jpg", "images/exairfoil.jpg", "pdfs/poster.pdf"],
+      paper: "pdfs/paper.pdf",
+      summary: `Designed and tested modified NLF1015 airfoils to study how surface geometry affects lift-to-drag performance. Developed parametric CAD models, 3D printed prototypes, and built a custom wind tunnel setup to measure lift and drag using force sensors.`,
+      details: [
+        `For this project, I wanted to see how different surface designs would affect how an airfoil performs. I started with the NASA NLF1015 airfoil and created variations with textures like wavy surfaces, triangular patterns, and dimples. Some designs were inspired by real-world examples, like golf ball dimples and shark skin, though I had to simplify certain features due to 3D printing and design limitations.`,
+        `I 3D printed the airfoils and tested them using a wind tunnel setup I built with a box fan. Using Vernier force sensors, I measured lift and drag across multiple trials to compare performance. I also worked with a mentor and peers to troubleshoot issues and improve the reliability of the setup.`,
+        `One of the main challenges was getting consistent airflow and accurate measurements with a simple setup, which required refining the tunnel and carefully aligning components.`,
+        `The results showed the smooth baseline airfoil performed best, while most surface modifications reduced efficiency, highlighting how sensitive aerodynamic performance is to small geometric changes. This project gave me my first real hands-on experience with aerodynamics and made me more interested in the field.`
+      ]
+    },
+    {
+      id: "open-turbine-engine",
+      title: "Open Turbine Concept Engine (Boeing RISE Inspired)",
+      tags: ["Fusion 360", "CAD Modeling", "Aerospace Design"],
+      thumbnail: "images/MainView.png",
+      images: ["images/MainView.png", "images/FrontView.png", "images/BackRightView.png", "images/BladeCloseUp.png"],
+      paper: "",
+      summary: `Designed a conceptual open turbine engine inspired by Boeing's RISE program to explore next-generation aircraft propulsion and strengthen my ability to model complex aerospace systems in Fusion 360.`,
+      details: [
+        `For this project, I wanted to challenge myself in Fusion 360 while learning more about modern aircraft propulsion systems. I was especially interested in open turbine (open fan) engines, which are being explored by companies like Boeing to improve fuel efficiency by using large, exposed fan blades.`,
+        `I designed the engine from scratch, modeling the central hub, outer structure, and multiple fan blades arranged symmetrically around the axis. One of the main challenges was creating blades with realistic curvature while keeping them consistent and evenly spaced. I used patterning and iterative adjustments to refine both the geometry and overall proportions of the design.`,
+        `Another challenge was balancing visual realism with what I could actually build in Fusion 360. Some shapes, especially around the blade profiles and connections, required simplifying real-world designs while still maintaining a believable structure.`,
+        `Through this project, I became more comfortable working with complex geometries and learned how to break down a large system into smaller, manageable components. It also helped me better understand how propulsion systems are evolving and gave me more confidence in translating real engineering concepts into CAD models.`
+      ]
+    }
+  ];
+
+  function mkTag(t) {
+    return t === 'Work in Progress'
+      ? `<span class="tag-wip">${t}</span>`
+      : `<span class="tag">${t}</span>`;
+  }
+
+  function renderGrid() {
+    document.getElementById('project-grid').innerHTML = PROJECTS.map(p => `
+      <div class="project-card" onclick="showDetail('${p.id}')">
+        <div class="card-img">
+          ${p.thumbnail
+            ? `<img src="${p.thumbnail}" alt="${p.title}">`
+            : `<span class="card-img-label">Project Image</span>`}
+        </div>
+        <div class="card-body">
+          <h3>${p.title}</h3>
+          <div class="card-tags">${p.tags.map(mkTag).join('')}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* ── LIGHTBOX ── */
+  function openLightbox(src, alt) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Close on Escape key */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function showDetail(id) {
+    const p = PROJECTS.find(x => x.id === id);
+    if (!p) return;
+
+    const cols = Math.min(p.images.length || 1, 4);
+    const gallery = document.getElementById('detail-gallery');
+    gallery.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+    gallery.innerHTML = p.images.map((src, i) => {
+      if (!src) {
+        return `<div class="detail-gallery-item"><span class="img-placeholder-label">Image ${i+1}</span></div>`;
+      } else if (src.endsWith('.pdf')) {
+        return `<div class="detail-gallery-item" style="cursor:pointer;">
+          <a href="${src}" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;color:#555;text-decoration:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;">View Poster</span>
+          </a>
+        </div>`;
+      } else {
+        return `<div class="detail-gallery-item">
+          <img src="${src}" alt="${p.title} image ${i+1}"
+               onclick="openLightbox('${src}', '${p.title} image ${i+1}')">
+        </div>`;
+      }
+    }).join('');
+
+    document.getElementById('detail-content').innerHTML = `
+      <div class="detail-section">
+        <h2>Summary</h2>
+        <p class="summary-bold">${p.summary}</p>
+      </div>
+      <div class="detail-section">
+        <h2>Description</h2>
+        ${p.details.map(d => `<p>${d}</p>`).join('')}
+      </div>
+      <div class="detail-tags-row">${p.tags.map(mkTag).join('')}</div>
+      ${p.paper ? `
+        <div style="margin-top:28px;">
+          <a href="${p.paper}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#1c1c1c;border:1px solid #e2e2e2;background:#f4f4f4;padding:9px 18px;border-radius:7px;text-decoration:none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+            View Research Paper
+          </a>
+        </div>` : ''}
+    `;
+
+    document.getElementById('view-home').classList.remove('active');
+    document.getElementById('view-detail').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showHome() {
+    document.getElementById('view-detail').classList.remove('active');
+    document.getElementById('view-home').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderGrid();
+</script>
+</body>
+</html>
