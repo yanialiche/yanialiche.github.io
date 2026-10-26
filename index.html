@@ -479,11 +479,9 @@
     const p = PROJECTS.find(x => x.id === id);
     if (!p) return;
 
-    const cols = Math.min(p.images.filter(s => s).length || 1, 4);
     const gallery = document.getElementById('detail-gallery');
     gallery.hidden = p.images.length === 0;
     gallery.style.display = p.images.length === 0 ? 'none' : '';
-    gallery.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
     gallery.innerHTML = p.images.map((src, i) => {
       if (!src) {
