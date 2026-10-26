@@ -174,8 +174,8 @@
     .btn-back:hover { background: var(--g5); color: var(--black); }
     .btn-back svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-    .detail-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 28px 0 0; }
-    .detail-gallery-item { aspect-ratio: 4/3; background: var(--g6); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s; }
+    .detail-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; }
+    .detail-gallery-item { min-width: 0; width: 100%; max-width: 246px; aspect-ratio: 4/3; background: var(--g6); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s; }
     .detail-gallery-item:hover { opacity: 0.85; }
     .detail-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
     .detail-gallery-item .img-placeholder-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g4); }
@@ -410,14 +410,14 @@
     },
     {
       id: "wind-tunnel-electrical-system",
-      title: "Wind Tunnel Electrical System",
+      title: "Educational Wind Tunnel",
       tags: ["Circuit Design", "Electronics", "Engineering Systems", "Work in Progress"],
       thumbnail: "images/WindTunnelIDea.png",
       images: ["images/WindTunnelIDea.png", "", "", ""],
       paper: "",
-      summary: `Designing the electrical portion of a miniature wind tunnel system to support testing and improve my understanding of how electronics integrate into experimental engineering setups.`,
+      summary: `A friend and I are developing a compact wind tunnel with the goal of supplying high schools with a practical tool for teaching aerodynamics. We noticed that many schools have engineering and science pathways, and wanted to give students a way to connect classroom concepts with experiments they can see and measure. The planned design will use smoke to make airflow visible and include attachments for force sensors to measure lift and drag. Our goal is to create a small classroom system that produces useful data while introducing students to aerodynamic testing.`,
       details: [
-        `[IN PROGRESS].`
+        `[In Progress]`
       ]
     }
   ];
