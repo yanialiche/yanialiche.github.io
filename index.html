@@ -393,6 +393,22 @@
       ]
     },
     {
+      id: "cornell-design-build-fly",
+      title: "Cornell Design Build Fly: Vertical Stabilizer",
+      tags: ["SolidWorks", "Aircraft Design", "Manufacturing", "Work in Progress"],
+      thumbnail: "images/dbf-vertical-stabilizer-1.png",
+      images: ["images/dbf-vertical-stabilizer-1.png", "images/dbf-vertical-stabilizer-2.png", "images/dbf-alignment-rig-1.png", "images/dbf-alignment-rig-2.png"],
+      imageCaptions: ["Vertical stabilizer and rudder CAD", "Stabilizer structure and control linkage", "Alignment rig CAD, view 1", "Alignment rig CAD, view 2"],
+      containImages: true,
+      paper: "",
+      summary: `Completed the SolidWorks CAD for a vertical stabilizer, rudder, and accompanying alignment rigs for Cornell Design Build Fly. The project is in progress, with manufacturing remaining.`,
+      details: [
+        `As a member of Cornell Design Build Fly's Aerodynamics and Controls subteam, I designed the vertical stabilizer and rudder assembly in SolidWorks. The model includes the internal ribs, spars, reinforcement, and servo linkage, bringing the structure and control hardware together in one assembly.`,
+        `Alongside the stabilizer, I designed alignment rigs to support manufacturing. The rigs use shaped supports and locating features to position the stabilizer and rudder components during assembly and bonding. Designing the tooling alongside the parts helped me think through how the CAD would translate into a physical build.`,
+        `The CAD for the stabilizer and alignment rigs is complete. Manufacturing is the remaining stage, and I will add photos of the build as it progresses.`
+      ]
+    },
+    {
       id: "wind-tunnel-electrical-system",
       title: "[IN PROGRESS] Wind Tunnel Electrical System",
       tags: ["Circuit Design", "Electronics", "Engineering Systems"],
@@ -417,8 +433,8 @@
       <div class="project-card" onclick="showDetail('${p.id}')">
         <div class="card-img">
           ${p.thumbnail
-            ? `<img src="${p.thumbnail}" alt="${p.title}">`
-            : `<span class="card-img-label">Project Image</span>`}
+            ? `<img src="${p.thumbnail}" alt="${p.title}"${p.containImages ? ' style="object-fit:contain;"' : ''}>`
+            : `<span class="card-img-label">${p.thumbnailLabel || 'Project Image'}</span>`}
         </div>
         <div class="card-body">
           <h3>${p.title}</h3>
@@ -465,6 +481,8 @@
 
     const cols = Math.min(p.images.filter(s => s).length || 1, 4);
     const gallery = document.getElementById('detail-gallery');
+    gallery.hidden = p.images.length === 0;
+    gallery.style.display = p.images.length === 0 ? 'none' : '';
     gallery.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
     gallery.innerHTML = p.images.map((src, i) => {
@@ -498,7 +516,7 @@
         </div>`;
       } else {
         return `<div class="detail-gallery-item">
-          <img src="${src}" alt="${p.title} image ${i+1}"
+          <img src="${src}" alt="${p.imageCaptions ? p.imageCaptions[i] : p.title + ' image ' + (i+1)}"${p.containImages ? ' style="object-fit:contain;"' : ''}
                onclick="openLightbox('${src}', '${p.title} image ${i+1}')">
         </div>`;
       }
