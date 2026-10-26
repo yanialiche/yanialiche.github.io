@@ -394,18 +394,18 @@
     },
     {
       id: "cornell-design-build-fly",
-      title: "Cornell Design Build Fly",
+      title: "Cornell Design Build Fly: Vertical Stabilizer",
       tags: ["SolidWorks", "Aircraft Design", "Manufacturing", "Work in Progress"],
-      thumbnail: "",
-      thumbnailLabel: "Cornell DBF",
-      images: [],
+      thumbnail: "images/dbf-vertical-stabilizer-1.png",
+      images: ["images/dbf-vertical-stabilizer-1.png", "images/dbf-vertical-stabilizer-2.png", "images/dbf-alignment-rig-1.png", "images/dbf-alignment-rig-2.png"],
+      imageCaptions: ["Vertical stabilizer and rudder CAD", "Stabilizer structure and control linkage", "Alignment rig CAD, view 1", "Alignment rig CAD, view 2"],
+      containImages: true,
       paper: "",
-      summary: `Designing the vertical stabilizer and tail control hardware for Cornell Design Build Fly as a member of the Aerodynamics and Controls subteam. My work includes internal ribs, structural supports, servo mounting, and assembly tooling.`,
+      summary: `Completed the SolidWorks CAD for a vertical stabilizer, rudder, and accompanying alignment rigs for Cornell Design Build Fly. The project is in progress, with manufacturing remaining.`,
       details: [
-        `I joined Cornell Design Build Fly in September 2026 to contribute to an aircraft that will be manufactured and flown. On the Aerodynamics and Controls subteam, I have been working on the vertical stabilizer and its integration with the rest of the tail assembly.`,
-        `In SolidWorks, I modeled the stabilizer structure, including internal ribs, reinforcement, and supports. I also worked on the servo mount and rudder linkage, considering how the servo arm, pushrod, and control horn fit together while leaving room for the rudder to move.`,
-        `A major part of the design process has been thinking through how the parts will be assembled. I developed a manufacturing plan for the stabilizer and rudder, covering hinge installation, servo placement, and linkage clearance. This has helped me connect CAD decisions with the steps needed to build the actual assembly.`,
-        `I am also developing a wing alignment jig that accounts for the spars and stringers passing through it. The challenge is to hold the wing components in position during bonding while allowing the jig to be removed after the adhesive cures. This work is teaching me to consider access, tolerances, and ease of manufacturing alongside the geometry itself.`
+        `As a member of Cornell Design Build Fly's Aerodynamics and Controls subteam, I designed the vertical stabilizer and rudder assembly in SolidWorks. The model includes the internal ribs, spars, reinforcement, and servo linkage, bringing the structure and control hardware together in one assembly.`,
+        `Alongside the stabilizer, I designed alignment rigs to support manufacturing. The rigs use shaped supports and locating features to position the stabilizer and rudder components during assembly and bonding. Designing the tooling alongside the parts helped me think through how the CAD would translate into a physical build.`,
+        `The CAD for the stabilizer and alignment rigs is complete. Manufacturing is the remaining stage, and I will add photos of the build as it progresses.`
       ]
     },
     {
@@ -433,7 +433,7 @@
       <div class="project-card" onclick="showDetail('${p.id}')">
         <div class="card-img">
           ${p.thumbnail
-            ? `<img src="${p.thumbnail}" alt="${p.title}">`
+            ? `<img src="${p.thumbnail}" alt="${p.title}"${p.containImages ? ' style="object-fit:contain;"' : ''}>`
             : `<span class="card-img-label">${p.thumbnailLabel || 'Project Image'}</span>`}
         </div>
         <div class="card-body">
@@ -516,7 +516,7 @@
         </div>`;
       } else {
         return `<div class="detail-gallery-item">
-          <img src="${src}" alt="${p.title} image ${i+1}"
+          <img src="${src}" alt="${p.imageCaptions ? p.imageCaptions[i] : p.title + ' image ' + (i+1)}"${p.containImages ? ' style="object-fit:contain;"' : ''}
                onclick="openLightbox('${src}', '${p.title} image ${i+1}')">
         </div>`;
       }
