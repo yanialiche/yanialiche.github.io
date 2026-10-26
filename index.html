@@ -393,6 +393,22 @@
       ]
     },
     {
+      id: "cornell-design-build-fly",
+      title: "Cornell Design Build Fly",
+      tags: ["SolidWorks", "Aircraft Design", "Manufacturing", "Work in Progress"],
+      thumbnail: "",
+      thumbnailLabel: "Cornell DBF",
+      images: [],
+      paper: "",
+      summary: `Designing the vertical stabilizer and tail control hardware for Cornell Design Build Fly as a member of the Aerodynamics and Controls subteam. My work includes internal ribs, structural supports, servo mounting, and assembly tooling.`,
+      details: [
+        `I joined Cornell Design Build Fly in September 2026 to contribute to an aircraft that will be manufactured and flown. On the Aerodynamics and Controls subteam, I have been working on the vertical stabilizer and its integration with the rest of the tail assembly.`,
+        `In SolidWorks, I modeled the stabilizer structure, including internal ribs, reinforcement, and supports. I also worked on the servo mount and rudder linkage, considering how the servo arm, pushrod, and control horn fit together while leaving room for the rudder to move.`,
+        `A major part of the design process has been thinking through how the parts will be assembled. I developed a manufacturing plan for the stabilizer and rudder, covering hinge installation, servo placement, and linkage clearance. This has helped me connect CAD decisions with the steps needed to build the actual assembly.`,
+        `I am also developing a wing alignment jig that accounts for the spars and stringers passing through it. The challenge is to hold the wing components in position during bonding while allowing the jig to be removed after the adhesive cures. This work is teaching me to consider access, tolerances, and ease of manufacturing alongside the geometry itself.`
+      ]
+    },
+    {
       id: "wind-tunnel-electrical-system",
       title: "[IN PROGRESS] Wind Tunnel Electrical System",
       tags: ["Circuit Design", "Electronics", "Engineering Systems"],
@@ -418,7 +434,7 @@
         <div class="card-img">
           ${p.thumbnail
             ? `<img src="${p.thumbnail}" alt="${p.title}">`
-            : `<span class="card-img-label">Project Image</span>`}
+            : `<span class="card-img-label">${p.thumbnailLabel || 'Project Image'}</span>`}
         </div>
         <div class="card-body">
           <h3>${p.title}</h3>
@@ -465,6 +481,8 @@
 
     const cols = Math.min(p.images.filter(s => s).length || 1, 4);
     const gallery = document.getElementById('detail-gallery');
+    gallery.hidden = p.images.length === 0;
+    gallery.style.display = p.images.length === 0 ? 'none' : '';
     gallery.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
     gallery.innerHTML = p.images.map((src, i) => {
